@@ -1,0 +1,22 @@
+version: '3'
+services:
+  spark:
+    image: jupyter/pyspark-notebook
+    ports:
+      - "8888:8888"
+      - "4040-4080:4040-4080"
+    volumes:
+      - ./notebooks:/home/jovyan/work/notebooks
+
+  mysql:
+    image: mysql
+    hostname: localhost
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: Mailjet
+    ports:
+      - '3306:3306'
+    volumes:
+      - /usr/local/mysql:/var/lib/mysql
